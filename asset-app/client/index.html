@@ -1,0 +1,111 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hyperledger Fabric Asset Management System</title>
+    <link rel="icon" href="favicon.png" type="image/gif">
+    <link rel="stylesheet" href="./style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+
+  </head>
+  <body class="background" ng-app="application" ng-controller="appController">
+    <header>
+      <div id="left_header"><strong>Hyperledger Fabric Asset Manager</strong></div>
+      <i id="center_header">Sample Blockchain Application to Track Non-Liquid Assets</i>
+      <img id="right_header" src="https://www.hyperledger.org/wp-content/uploads/2018/03/Hyperledger_Fabric_Logo_Color.png"/>
+    </header>
+
+    <div id="body">
+      <div class="form-group">
+        <label>Query All Assets</label>
+        <p><input id="queryAllAsset" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllAsset()"></p>
+      </div>
+ 
+      <table id="all_asset" class="table" align="center">
+
+        <tr>
+          <th>ID</th>
+          <th>Asset</th>
+          <th>Owner</th>
+          <th>Asset Location<br>(or location of sale)</th>
+          <th>Intial Cost</th>
+        </tr>
+
+        <tr ng-repeat="asset in all_asset">
+          <td>{{asset.Key}}</td>
+          <td>{{asset.item}}</td>
+          <td>{{asset.holder}}</td>
+          <td>{{asset.location}}</td>
+          <td>{{asset.cost}}</td>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <label>Query a Specific Asset</label><br>
+        <h5 style="color:red;margin-bottom:2%" id="error_query"><strong>Error: Please enter a valid Asset Id</strong></h5>
+        
+        Enter an asset number: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="asset_id">
+        <input id="querySubmit" type="submit" value="Query" class="btn btn-primary" ng-click="queryAsset()">
+      </div>
+
+      <table id="query_asset" class="table" align="center">
+
+        <tr>
+          <th>Asset</th>
+          <th>Owner</th>
+          <th>Asset Location<br>(or location of sale)</th>
+          <th>Initial Cost</th>
+        </tr>
+
+        <tr>
+          <td>{{query_asset.item}}</td>
+          <td>{{query_asset.holder}}</td>
+          <td>{{query_asset.location}}</td>
+          <td>{{query_asset.cost}}</td>
+        </tr>
+      </table>
+      <div>
+      <div class="form-group col-md-6">
+        <label>Create Asset Record</label>
+        <h5 style="color:green;margin-bottom:2%" id="success_create">Success! Record Added. Tx ID: {{create_asset}}</h5>
+        <br>
+        Enter Asset id: <input class="form-control" type="text" placeholder="Ex: 11" ng-model="asset.id">
+        Enter Asset: <input class="form-control" type="text" placeholder="Enter Asset" ng-model="asset.item">
+        Enter name of new Holder: <input class="form-control" name="assetSelect" placeholder="Ex: Paul Smith" ng-model="asset.holder">
+        Enter Inital Cost: <input class="form-control" type="text" placeholder="Enter Dollar Value" ng-model="asset.cost">
+        Enter Location: <input class="form-control" type="text" placeholder="City, State, Country" ng-model="asset.location">
+        <input id="createSubmit" type="submit" value="Create" class="btn btn-primary" ng-click="recordAsset()"> 
+      </div>
+
+      <div class="form-group col-md-6">
+        <label>Change Asset Holder</label><br>
+        <h5 style="color:green;margin-bottom:2%" id="success_holder">Succes! Transaction Approved. Tx ID: {{change_holder}}</h5>
+        <h5 style="color:red;margin-bottom:2%" id="error_holder">Error: Please enter a valid Asset Id</h5>
+        Enter an asset id: <input class="form-control" name="assetSelect" placeholder="Ex: 3" ng-model="holder.id">
+        Enter name of new Holder: <input class="form-control" name="assetSelect" placeholder="Ex: Jerry Joe" ng-model="holder.name">
+         <input id="transferSubmit" type="submit" value="Change" class="btn btn-primary" ng-click="changeHolder()">
+      </div>
+      <!-- <div class="form-group col-md-6">
+        <label>Change Contract Length</label><br>
+        <h5 style="color:green;margin-bottom:2%" id="success_cost">Succes! Transaction Approved. Tx ID: {{change_cost}}</h5>
+        <h5 style="color:red;margin-bottom:2%" id="error_cost">Error: Please enter a valid Asset Id</h5>
+        Enter an asset id: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="cost.id">
+        New Contract Length <input class="form-control" name="assetSelect" placeholder="Ex: dd/mm/yy - dd/mm/yy" ng-model="cost.name">
+         <input id="transferSubmit" type="submit" value="Change" class="btn btn-primary" ng-click="changeCost()">
+      </div> -->
+    </div>
+    </div>
+    <div class="page-footer">
+    <footer>
+      <p id="footer">Recogniton to Hyperledger Fabric Team https://github.com/hyperledger/education for code source</p>
+    </footer>
+    </div> 
+  </body>
+    <!-- requiring the angular page -->
+    <script type="text/javascript" src="app.js"> </script>
+</html>
