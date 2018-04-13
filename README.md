@@ -16,18 +16,19 @@ Please open your local terminal and clone the following repository
 
 $ git clone https://github.com/hyperledger/education.git
 
-Next navigate into your the asset-app.
+Next navigate into the asset-app folder.
 
-Please make sure Docker is running at this time. Should you have used it prior, please run the code below to clear your containers.
+Make sure Docker is running at this time. Should you have used it prior, please run the code below to clear your containers.
 
+$ Docker rm -f $(docker ps -aq)
 
 Now lets start the Hyperledger Fabric network. Please enter the following command:
 
 $ ./startFabric.sh
 
-If you continue to watch your terminal, you will begin to see the network start up and great an initial "genesis block" which we will be the initial data we work with in this app. 
+As the networks starts up you will see the initial "genesis block" be created which we will be the initial data we work with in this app. 
 
-Please now run the following command:
+Please now run the following command in the same folder:
 
 $ npm install
 
